@@ -1,96 +1,98 @@
-ANONToken
-The first privacy primitive on Linea. Fully decentralized. No zk. No relayers. No bridges.
+# ANONToken
 
-ANONToken is a censorship-resistant ERC-20 protocol that lets users unlink their everyday crypto wallet from real-world spending, such as a MetaMask Card. By minting and then burning a single token, users receive ETH into a freshly generated stealth address — fully anonymized, without any centralized server or third-party control.
+**OG Ethereum Privacy Primitive · Fully Decentralized · No zk · Linea Native**
 
-🌐 Testnet App (Linea Sepolia)
-🛠 Built for Linea · Open-source · OG Ethereum ethos
+ANONToken is a censorship-resistant ERC-20 dApp deployed on the Linea Sepolia Testnet. It allows users to unlink their everyday wallet (like MetaMask) from real-world spending (e.g., MetaMask Card) by minting and burning a token. ETH is sent to a newly generated, anonymous wallet — no bridges, no relayers, no zk required.
 
-🔐 How It Works
-Mint
+> 🔗 **App:** [immense-honey-brief.on-fleek.app](https://immense-honey-brief.on-fleek.app)  
+> 🧱 **Contract:** `0xAfEAE83BD71E44d4291E95D621B10f3d3ff29a28` (Linea Sepolia)
 
-Send exactly 0.00000001 ETH (testnet price) to mint 1 ANON.
+---
 
-Tokens are standard ERC-20 and transferable, but only burners receive the anonymous ETH.
+## 🔐 How It Works
 
-Burn for Privacy
+### 1. Mint
+- Send `0.00000001 ETH` (testnet price) to mint 1 ANON token.
+- Tokens are standard ERC-20 and transferable.
 
-The frontend generates a fresh stealth wallet (private key never leaves the browser).
+### 2. Burn for Privacy
+- Frontend generates a stealth address and private key (never leaves your browser).
+- You sign a hash that binds wallet, burnId, contract, chainId, and entropy.
+- ETH is sent to the stealth wallet after a randomized delay.
 
-You sign a commitment off-chain (binding wallet + contract + chain + entropy).
+### 3. Receive
+- When 50 users have burned, a user triggers the withdrawal processor.
+- ETH is sent anonymously to your stealth address.
+- You import your key to access the funds — unlinking identity from source wallet.
 
-One transaction sends ETH to the stealth address after a randomized delay (1–12h).
+---
 
-Withdraw
+## 💡 Why ANONToken?
 
-Once 50 burns accumulate, one user triggers a randomized, anonymized payout.
+| Feature           | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| **No zk Required** | No SNARKs, no relayers, no bridge logic — pure Ethereum-based unlinkability. |
+| **Random Delays** | Withdrawals unlock between 1–12 hours later to break timing analysis.       |
+| **Full Decentralization** | No admin keys, no upgrades — immutable code.                          |
+| **Zero Protocol Fees** | 0% fee (on testnet) — only gas is paid.                                 |
+| **Gas Pooling**   | Withdrawals are paid from a shared gas pool with overage refunds.           |
+| **Self-Custody**  | Only you hold the stealth private key — full control, no servers.           |
 
-Funds land in the stealth address. You import the private key to access them.
+---
 
-🧱 Key Features
-Feature	Description
-Privacy Model	Burn-based unlinkability; randomized queue delays; no zk needed.
-Chain	Linea Sepolia (testnet).
-Frontend	Fully browser-based, no backend. Keys generated locally.
-Fees	0% protocol fee (testnet); gas-only model.
-Security	Immutable contract, capped retry logic, no owner/admin keys.
-Gas Optimization	Uses EWMA gas oracle logic with capped reimbursement.
+## 🧪 Testnet Instructions
 
-🧪 How to Use (Testnet)
-Setup
+1. **Connect Wallet**
+   - Use MetaMask or [Rabby Wallet (desktop)](https://rabby.io/)
+   - Connect to **Linea Sepolia** testnet
 
-Connect via Rabby Desktop or MetaMask to Linea Sepolia
+2. **Mint Token**
+   - Visit [the dApp](https://immense-honey-brief.on-fleek.app)
+   - Click **"Mint 1 ANON"** to receive your token
 
-Get Sepolia ETH here
+3. **Burn Token**
+   - Click **"Burn 1 ANON"**
+   - A new private key is generated and saved as `.txt`
+   - Burn request is queued for anonymous withdrawal
 
-Mint
+4. **Withdraw ETH**
+   - Once 50 burns are submitted, a user triggers `processWithdrawals()`
+   - ETH is sent to the stealth address
+   - You import the key to spend it privately
 
-Visit: ANONToken dApp
+---
 
-Click “Mint 1 ANON” to send 0.00000001 ETH and receive a token.
+## ⚙️ Smart Contract Details
 
-Burn
+| Parameter             | Value                                      |
+|-----------------------|--------------------------------------------|
+| **Mint Price**        | `0.00000001 ETH` (testnet)                 |
+| **Burn Delay**        | Randomized between 1–12 hours              |
+| **Min Anonymity Set** | 50 burns required per batch                |
+| **Fee**               | `0%` (all ETH sent to users minus gas)     |
+| **Retry Limit**       | 7 attempts before fallback to fee sink     |
+| **Gas Estimation**    | EWMA with 12.5% buffer                     |
+| **Gas Refund**        | Last burner in the batch triggers withdraw & is reimbursed |
 
-Click “Burn 1 ANON”
+---
 
-App generates a fresh stealth key + signature
+## 🛠 Developer
 
-Submits burn tx + gas prepayment
+- **Frontend:** Static HTML + JS (no server)
+- **Private Keys:** Generated with `ethers.Wallet(randomBytes(32))`
+- **Security:** Signature-based authorization, no contracts allowed
+- **Gas Pool:** Pooled ETH for each 50-user batch
 
-Wait 1–12 hours until batch of 50 burns is processed
+---
 
-Withdraw
+## ⚠️ Disclaimer
 
-Import the stealth key in MetaMask or Rabby
+This is a **testnet-only** deployment. Do not use with mainnet ETH.  
+Losing your stealth private key = losing access to your ETH.  
+This system is experimental, use at your own risk.
 
-Your ETH appears post-randomized delay (fully unlinkable to source)
+---
 
-🛡 Smart Contract
-Address (Sepolia): 0xAfEAE83BD71E44d4291E95D621B10f3d3ff29a28
+## 🧬 License
 
-Token Symbol: ANON
-
-Decimals: 18
-
-Mint Price: 0.00000001 ETH
-
-Anonymity Set: 50
-
-Delay: Randomized between 1 – 12 hours
-
-Reentrancy Protection: Enabled
-
-Gas Refund: Caller of processWithdrawals() is reimbursed from pooled ETH
-
-📁 Key Files
-File	Description
-index.html	Main frontend UI
-script.js	All wallet, mint, burn, and stealth logic
-ANONToken.sol	Solidity contract with gas pool batching, retry limits, and anonymity logic
-style.css	Fully dark, Linea-themed visual style with responsive components
-
-⚠️ Disclaimer
-This is a testnet deployment. ETH and ANON tokens on Linea Sepolia have no real value. Keep your private key safe. No one can recover your ETH if you lose the stealth key.
-
-🧬 License
-MIT © 2025
+MIT © 2025 — CountFuckula.com
