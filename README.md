@@ -34,7 +34,7 @@ ANONToken is a censorship-resistant ERC-20 dApp deployed on the Linea Sepolia Te
 | **No zk Required** | No SNARKs, no relayers, no bridge logic — pure Ethereum-based unlinkability. |
 | **Random Delays** | Withdrawals unlock between 1–12 hours later to break timing analysis.       |
 | **Full Decentralization** | No admin keys, no upgrades — immutable code.                          |
-| **Zero Protocol Fees** | 0% fee (on testnet) — only gas is paid.                                 |
+| **Zero Protocol Fees** | 0% fee — only gas is paid.                                 |
 | **Gas Pooling**   | Withdrawals are paid from a shared gas pool with overage refunds.           |
 | **Self-Custody**  | Only you hold the stealth private key — full control, no servers.           |
 
