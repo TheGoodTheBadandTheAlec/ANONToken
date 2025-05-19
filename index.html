@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANONToken · OG-Ethereum Ethos · Privacy Primitive · Linea Native</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+	:root {
+	  /* Linea cyan + deep-navy UI */
+	  --primary:   #00c2ff;   /* Linea brand blue */
+	  --secondary: #0d1218;   /* dark-navy surface */
+	  --bg-dark:   #06090d;
+	  --bg-panel:  #0f151d;
+	  --text:      #e8f9ff;   /* very-light cyan for contrast */
+	  --text-dim:  #93b7c4;
+	  --success:   #00e5ff;   /* brighter cyan flash */
+	  --warning:   #ff9100;   /* keep for contrast */
+	  --font-mono: 'Courier New', monospace;
+
+
+
+	}
+
+	  .linea-logo {
+  height: 26px;
+  width: auto;
+  fill: var(--primary);
+  filter: drop-shadow(0 0 4px #00c2ff55);
+}
+
+
+	.powered{
+  display:inline-flex;
+  gap:6px;
+  align-items:center;
+  margin-top:8px;
+  opacity:.7;
+}
+
+.bat-logo{
+  height:40px;
+  width:auto;
+  filter:drop-shadow(0 0 6px var(--primary));
+  margin-right:15px;
+}
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(rgba(0, 194, 255, 0.06) 1px, transparent 1px),
+        radial-gradient(rgba(0, 194, 255, 0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      margin-bottom: 40px;
+      text-align: center;
+      padding-top: 40px;
+    }
+    
+    .logo {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    
+    .logo span {
+      color: var(--primary);
+    }
+    
+    .logo svg {
+      height: 40px;
+      margin-right: 15px;
+    }
+    
+    .subtitle {
+      font-size: 1rem;
+      color: var(--text-dim);
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+    
+    .panel {
+      background: var(--bg-panel);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(0, 194, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    
+    .panel-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+    
+    .panel-title i {
+      margin-right: 10px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    
+    .status-indicator {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #666;
+      margin-right: 8px;
+    }
+    
+    .status-dot.connected {
+      background-color: var(--success);
+      box-shadow: 0 0 10px var(--success);
+    }
+    
+    .btn {
+      background: var(--secondary);
+      color: var(--text);
+      border: none;
+      border-radius: 8px;
+      padding: 15px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px 0;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      font-weight: 500;
+    }
+    
+    .btn i {
+      margin-right: 10px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .btn-primary { background: linear-gradient(135deg, var(--primary), #0084d1); color: #fff; }
+    
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 100%;
+      top: 0;
+      left: -40px;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewX(-20deg);
+      transition: 0.7s;
+      filter: blur(5px);
+    }
+    
+    .btn-primary:hover::after {
+      left: calc(100% + 40px);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--text-dim);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .info-box {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 3px solid var(--primary);
+    }
+    
+    .info-box p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .steps {
+      counter-reset: step;
+      margin: 30px 0;
+    }
+    
+    .step {
+      position: relative;
+      padding-left: 50px;
+      margin-bottom: 25px;
+    }
+    
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 34px;
+      height: 34px;
+      background: var(--secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .step-desc {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--text-dim), transparent);
+      margin: 30px 0;
+      opacity: 0.3;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px 0;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+    
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+    }
+    
+    .modal-content {
+      background: var(--bg-panel);
+      padding: 35px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 194, 255, 0.2);
+      position: relative;
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      text-align: center;
+    }
+    
+    .modal-warning {
+      color: var(--warning);
+      text-align: center;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      padding: 15px;
+      background: rgba(255, 145, 0, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 145, 0, 0.3);
+    }
+    
+    .modal-label {
+      color: var(--text);
+      margin: 15px 0 5px;
+      display: block;
+      font-weight: 500;
+    }
+    
+    .modal-input {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--text-dim);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      resize: none;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      gap: 15px;
+    }
+    
+    /* Animation & Visual Effects */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 194, 255, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 194, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 194, 255, 0); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* Console output section */
+    .console {
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #9e9e9e;
+      height: 120px;
+      overflow-y: auto;
+      border: 1px solid #333;
+    }
+    
+    .console .log {
+      margin-bottom: 5px;
+    }
+    
+    .console .success {
+      color: var(--success);
+    }
+    
+    .console .error {
+      color: var(--primary);
+    }
+    
+    .console .warning {
+      color: var(--warning);
+    }
+    
+    /* Terminal text animation */
+    .typing::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    /* Balance display */
+    .balance-display {
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .balance-title {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+    
+    .balance-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .balance-value span {
+      color: var(--primary);
+    }
+    
+    /* Progress indicator */
+    .progress-bar {
+      height: 4px;
+      width: 100%;
+      background: var(--secondary);
+      border-radius: 2px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+<h1 class="logo">
+  <!-- Cartoon bat logo as inline SVG -->
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"
+       stroke="var(--primary)" stroke-width="12" stroke-linecap="round"
+       stroke-linejoin="round" fill="#06090d" class="bat-logo">
+    <circle cx="100" cy="110" r="48"/>
+    <circle cx="100" cy="60"  r="38"/>
+    <path d="M70 35  55 5  85 25Z"/>
+    <path d="M130 35 145 5 115 25Z"/>
+    <path d="M52 105 Q 10 125 35 160 Q 20 160 42 185 Q 70 165 56 115Z"/>
+    <path d="M148 105 Q 190 125 165 160 Q 180 160 158 185 Q 130 165 144 115Z"/>
+    <path d="M72 85 50 70"/>
+    <path d="M128 85 150 70"/>
+    <circle cx="78"  cy="165" r="10"/>
+    <circle cx="122" cy="165" r="10"/>
+    <circle cx="85"  cy="65" r="14" fill="#e8f9ff" stroke="none"/>
+    <circle cx="115" cy="65" r="14" fill="#e8f9ff" stroke="none"/>
+    <circle cx="85"  cy="65" r="7"  fill="#06090d" stroke="none"/>
+    <circle cx="115" cy="65" r="7"  fill="#06090d" stroke="none"/>
+    <path d="M88 90 Q100 100 112 90" fill="none"/>
+    <path d="M100 93 v11" fill="none"/>
+  </svg>
+  <span>ANON</span>TOKEN
+</h1>
+
+<a href="https://linea.build" target="_blank" class="powered">
+  <svg class="linea-logo" viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+    <rect x="0" y="4" width="8" height="16" rx="1" />
+    <rect x="12" y="0" width="8" height="24" rx="1" />
+    <text x="28" y="17" font-family="Segoe UI, Roboto, sans-serif" font-size="16" fill="var(--text)">Linea</text>
+  </svg>
+</a>
+
+
+      <p class="subtitle">Unlink your MetaMask Card from your on-chain identity, for free, only on Linea.</p>
+    </div>
+    
+    <div class="panel">
+      <h2 class="panel-title"><i class="fas fa-plug"></i> Connection</h2>
+      <div class="status-indicator">
+        <div class="status-dot" id="connectionDot"></div>
+        <span id="connectionStatus">Disconnected</span>
+      </div>
+      <p>Connect your wallet to access ANONToken on Linea.</p>
+      <button id="connect" class="btn btn-primary"><i class="fas fa-wallet"></i> Connect Wallet</button>
+      
+      <div id="walletInfo" style="display: none;">
+        <div class="divider"></div>
+        <div class="balance-display">
+          <div class="balance-title">ANON Token Balance</div>
+          <div class="balance-value"><span id="tokenBalance">0</span> ANON</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="grid">
+      <div class="panel">
+        <h2 class="panel-title"><i class="fas fa-coins"></i>Mint ANON (1-click)</h2>
+        <p>Mint exactly 1 ANON to start the unlinking process..</p>
+        <div class="info-box">
+          <p>Cost per token: <strong>0.00000001 ETH (Linea Sepolia preview)</strong><br>
+          No relayers • No bridges • No fees</p>
+        </div>
+        <button id="mint" class="btn btn-primary" disabled><i class="fas fa-fire-alt"></i> Mint 1 ANON</button>
+        <div class="console" id="mintConsole">
+          <div class="log typing">System ready...</div>
+        </div>
+      </div>
+      
+      <div class="panel">
+        <h2 class="panel-title"><i class="fas fa-mask"></i>Burn ANON & receive ETH privately</h2>
+        <p>Burning sends your ETH to a brand-new stealth wallet that only you control — completely severing links to your everyday wallet or MetaMask Card.</p>
+        <div class="info-box">
+          <p title="A gas pool prepayment is deducted from the ETH you send. You will get the leftovers back.">Your funds will be sent to a stealth address only you can access.</p>
+        </div>
+        <button id="burn" class="btn btn-primary" disabled title="Burn 1 ANON to queue an anonymous ETH withdrawal (no fee, just prepay gas)"><i class="fas fa-ghost"></i> Burn 1 ANON</button>
+        <div class="console" id="burnConsole">
+          <div class="log typing">System ready...</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="panel">
+      <h2 class="panel-title"><i class="fas fa-shield-alt"></i> User Flow </h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-title">Connect Wallet (Linea Sepolia)</div>
+          <p class="step-desc">Connect your Rabby wallet to the Linea Sepolia testnet.</p>
+        </div>
+        <div class="step">
+          <div class="step-title">Mint 1 ANON</div>
+          <p class="step-desc">Mint an ANON token for 0.00000001 ETH.</p>
+        </div>
+        <div class="step">
+          <div class="step-title">Burn to queue stealth withdrawal (no fee)</div>
+          <p class="step-desc" title="Withdrawals only process once 50 users have burned to preserve anonymity.">Burn your ANON tokens to queue an anonymous withdrawal. 0.00000001 ETH - No Fee - Gas is sent to your stealth wallet after a 1-12 hour delay, and once 50 total burns are queued.</p>
+        </div>
+        <div class="step">
+          <div class="step-title">Import the private key, avoid phishing scams, spend freely</div>
+          <p class="step-desc" title="ETH is sent after a random delay between 1–12 hours to unlink timing metadata.">Save the private key securely. This is the only way to access your funds sent to your stealth address. Wait for 1-12 hours after 50 burns are queued. </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>ANONToken &copy; 2025 | OG-Ethereum privacy primitive | Linea Sepolia Testnet</p>
+    </div>
+  </div>
+  
+  <!-- Modal for stealth key -->
+  <div class="modal" id="stealthModal">
+    <div class="modal-content">
+      <div class="modal-title">
+        <i class="fas fa-key"></i> Your Private Key
+      </div>
+      
+    <div class="modal-warning">
+      <i class="fas fa-exclamation-triangle"></i> WARNING: This key will not be shown again. Losing or compromising it also means losing access to the ETH sent to your stealth address.<br><br>
+      Do <strong>NOT</strong> use on public or compromised devices.
+    </div>
+      
+      <label class="modal-label" title="This private key controls your stealth wallet. Keep it secret—anyone with this key can access your funds.">Private Key:</label>
+      <textarea id="pkeyText" class="modal-input" rows="2" readonly></textarea>
+      
+      <label class="modal-label" title="The stealth address is where your anonymized ETH will be sent. Import it to MetaMask to access your funds.">Stealth Address:</label>
+      <textarea id="stealthAddressText" class="modal-input" rows="2" readonly></textarea>
+      
+      <div class="progress-bar">
+        <div class="progress-fill" id="securityTimer"></div>
+      </div>
+      
+      <div class="modal-buttons">
+        <button id="copyPKey" class="btn btn-secondary"><i class="fas fa-copy"></i> Copy Key</button>
+        <button id="downloadPKey" class="btn btn-secondary"><i class="fas fa-download"></i> Download Key File</button>
+        <button id="closeModal" class="btn btn-primary"><i class="fas fa-check"></i> I've Saved My Key</button>
+      </div>
+    </div>
+  </div>
+
+<script type="module">
+import { ethers } from 'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js';
+
+const CONTRACT = '0xAfEAE83BD71E44d4291E95D621B10f3d3ff29a28';
+const ABI = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "ECDSAInvalidSignature",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "length",
+				"type": "uint256"
+			}
+		],
+		"name": "ECDSAInvalidSignatureLength",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "s",
+				"type": "bytes32"
+			}
+		],
+		"name": "ECDSAInvalidSignatureS",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "allowance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "needed",
+				"type": "uint256"
+			}
+		],
+		"name": "ERC20InsufficientAllowance",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "balance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "needed",
+				"type": "uint256"
+			}
+		],
+		"name": "ERC20InsufficientBalance",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "approver",
+				"type": "address"
+			}
+		],
+		"name": "ERC20InvalidApprover",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "receiver",
+				"type": "address"
+			}
+		],
+		"name": "ERC20InvalidReceiver",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			}
+		],
+		"name": "ERC20InvalidSender",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			}
+		],
+		"name": "ERC20InvalidSpender",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Minted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "commitmentHash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "refundAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint8",
+				"name": "retryCount",
+				"type": "uint8"
+			}
+		],
+		"name": "WithdrawalFailed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "commitmentHash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "WithdrawalSentToFeeRecipient",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "BASE_PROCESS_TIME",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_DELAY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_RETRY_ATTEMPTS",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MIN_ANONYMITY_SET",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MIN_DELAY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "RETRY_INTERVAL",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			}
+		],
+		"name": "allowance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "batchCaller",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "burnIds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "calculateFee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "decimals",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "estimateGasCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "feeBasisPoints",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "lastProcessedTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mint",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mintPrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "processWithdrawals",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "stealthRecipient",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature",
+				"type": "bytes"
+			},
+			{
+				"internalType": "uint256",
+				"name": "userEntropy",
+				"type": "uint256"
+			}
+		],
+		"name": "requestBurn",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "transferFrom",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"name": "usedSignatures",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "userLastMint",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+	
+const LINEA_DEC = 59141;      // decimal
+const LINEA_HEX = '0xe705';   // hex
+
+let provider;
+let contract;
+let currentAccount;
+let userBalance = 0;
+
+/* ---------- UI elements ---------- */
+const connectionDot = document.getElementById('connectionDot');
+const connectionStatus = document.getElementById('connectionStatus');
+const walletInfo = document.getElementById('walletInfo');
+const tokenBalance = document.getElementById('tokenBalance');
+const mintBtn = document.getElementById('mint');
+const burnBtn = document.getElementById('burn');
+const mintConsole = document.getElementById('mintConsole');
+const burnConsole = document.getElementById('burnConsole');
+const stealthModal = document.getElementById('stealthModal');
+const securityTimer = document.getElementById('securityTimer');
+const pkeyText = document.getElementById('pkeyText');
+const stealthAddressText = document.getElementById('stealthAddressText');
+
+/* ---------- helpers ---------- */
+function logToConsole(consoleEl, message, type = '') {
+  const log = document.createElement('div');
+  log.className = `log ${type}`;
+  log.textContent = message;
+  
+  // Remove typing class from previous logs
+  const logs = consoleEl.querySelectorAll('.typing');
+  logs.forEach(el => el.classList.remove('typing'));
+  
+  consoleEl.appendChild(log);
+  consoleEl.scrollTop = consoleEl.scrollHeight;
+  
+  return log; // Return the log element for later reference
+}
+
+async function ensureLinea () {
+  const cid = await window.ethereum.request({ method: 'eth_chainId' });
+  if (parseInt(cid, 16) === LINEA_DEC) return true;     // already on Linea
+
+  try {
+    /* try to switch first */
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: LINEA_HEX }]
+    });
+    return true;
+  } catch (e) {
+    /* chain hasn’t been added yet */
+    if (e.code === 4902) {
+      try {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: LINEA_HEX,
+            chainName: 'Linea Sepolia',
+            rpcUrls: ['https://rpc.sepolia.linea.build'],
+            blockExplorerUrls: ['https://sepolia.lineascan.build'],
+            nativeCurrency: { name: 'LineaETH', symbol: 'ETH', decimals: 18 }
+          }]
+        });
+        return true;
+      } catch (addErr) {
+        logToConsole(mintConsole, `Failed to add Linea: ${addErr.message}`, 'error');
+        return false;
+      }
+    }
+    logToConsole(mintConsole, `Failed to switch: ${e.message}`, 'error');
+    return false;
+  }
+}
+
+
+function saveKey(hex) {
+  // Create a text file with both private key and derived address
+  const wallet = new ethers.Wallet(hex);
+  const content = 
+`IMPORTANT - STEALTH WITHDRAWAL KEY
+=================================
+DO NOT SHARE THIS FILE WITH ANYONE
+KEEP THIS FILE SAFE AND SECURE
+
+Private Key: ${hex}
+Address: ${wallet.address}
+
+Instructions:
+1. Import this private key into your wallet when you want to access your funds
+2. Only import when needed, then move funds to your main wallet
+3. Anyone with this key can access your funds
+`;
+
+  const blob = new Blob([content], {type:'text/plain'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'stealth_key_' + wallet.address.substring(2, 8) + '.txt';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+async function updateBalance() {
+  if (!contract || !currentAccount) return;
+  
+  try {
+    const balance = await contract.balanceOf(currentAccount);
+    userBalance = ethers.utils.formatEther(balance);
+    tokenBalance.textContent = userBalance;
+    
+    // Enable/disable burn button based on balance
+    burnBtn.disabled = parseFloat(userBalance) < 1;
+  } catch (err) {
+    logToConsole(mintConsole, "Failed to update token balance.", "error");
+  }
+}
+
+function startSecurityTimer() {
+  let width = 0;
+  const interval = setInterval(() => {
+    width += 0.5;
+    securityTimer.style.width = `${width}%`;
+    
+    if (width >= 100) {
+      clearInterval(interval);
+    }
+  }, 50); // 10s total (50ms * 200)
+}
+
+/* ---------- UI actions ---------- */
+async function connectWallet () {
+  // 0️ Make sure MetaMask exists
+  if (!window.ethereum) {
+    logToConsole(mintConsole, "MetaMask not found.", "error");
+    return;
+  }
+
+  // 1️ Ask MetaMask to unlock & return an account
+  let accounts;
+  try {
+    accounts = await ethereum.request({ method: "eth_requestAccounts" });
+  } catch (err) {
+    logToConsole(mintConsole, `MetaMask error: ${err.message}`, "error");
+    return;
+  }
+  if (!accounts.length) {
+    logToConsole(mintConsole, "User rejected connection.", "error");
+    return;
+  }
+  currentAccount = accounts[0];
+
+  // 2 Ensure Linea Sepolia
+  if (!(await ensureLinea())) return;
+
+  // 3️ Create provider & update UI
+  provider  = new ethers.providers.Web3Provider(window.ethereum, "any");
+  const signer = provider.getSigner(currentAccount);   // pass the address explicitly
+  contract     = new ethers.Contract(CONTRACT, ABI, signer);
+
+  connectionDot.classList.add("connected");
+  connectionStatus.textContent =
+        `Connected: ${currentAccount.slice(0,6)}…${currentAccount.slice(-4)}`;
+  walletInfo.style.display = "block";
+  await updateBalance();
+  mintBtn.disabled = false;
+  logToConsole(mintConsole, "Ready for transactions.", "success");
+
+  // 4️ React to future MetaMask changes
+  ethereum.on("accountsChanged", handleAccountsChanged);
+  ethereum.on("chainChanged", () => window.location.reload());
+}
+
+function handleAccountsChanged(accounts) {
+  if (accounts.length === 0) {
+    // User disconnected
+    disconnectWallet();
+  } else if (accounts[0] !== currentAccount) {
+    currentAccount = accounts[0];
+    logToConsole(mintConsole, `Account changed: ${currentAccount.substring(0, 6)}...`, '');
+    updateBalance();
+  }
+}
+
+function handleChainChanged() {
+  // Reload the page on chain change
+  window.location.reload();
+}
+
+function disconnectWallet() {
+  currentAccount = null;
+  connectionDot.classList.remove('connected');
+  connectionStatus.textContent = 'Disconnected';
+  walletInfo.style.display = 'none';
+  mintBtn.disabled = true;
+  burnBtn.disabled = true;
+  logToConsole(mintConsole, 'Wallet disconnected', 'warning');
+}
+
+async function mintToken() {
+  if (!provider || !contract) {
+    logToConsole(mintConsole, 'Connect wallet first', 'error');
+    return;
+  }
+  
+  const mintingLog = logToConsole(mintConsole, 'Preparing mint transaction...', 'typing');
+  
+  try {
+    const signer = provider.getSigner();
+    const price = await contract.mintPrice();
+    
+    logToConsole(mintConsole, `Minting 1 ANON token for ${ethers.utils.formatEther(price)} ETH`, '');
+    
+    const tx = await contract.mint({ value: price });
+    mintingLog.textContent = `Transaction submitted. Hash: ${tx.hash.substring(0, 10)}...`;
+
+    logToConsole(mintConsole, 'Waiting for confirmation...', 'typing');
+    await tx.wait();
+    
+    logToConsole(mintConsole, 'ANON token minted successfully!', 'success');
+    await updateBalance();
+  } catch (err) {
+    mintingLog.textContent = `Mint failed: ${err.message}`;
+    mintingLog.className = 'log error';
+  }
+}
+
+async function burnAnon() {
+  if (!provider || !contract) {
+    logToConsole(burnConsole, 'Connect wallet first', 'error');
+    return;
+  }
+  if (parseFloat(userBalance) < 1) {
+    logToConsole(burnConsole, 'Insufficient ANON balance. You need at least 1 ANON.', 'error');
+    return;
+  }
+
+  const burningLog = logToConsole(burnConsole, 'Preparing stealth transfer...', 'typing');
+
+  try {
+    const signer = provider.getSigner();
+    const user = await signer.getAddress();
+    const { chainId } = await provider.getNetwork();
+
+	// --- STEALTH KEY & HASH (raw key never leaves the browser) ---
+	const keyBytes       = ethers.utils.randomBytes(32);      // 32‑byte private‑key seed
+	const stealthWallet  = new ethers.Wallet(keyBytes);
+	const stealthAddress = stealthWallet.address;
+	
+	// only this hash is sent on‑chain – pre‑image safe
+	const entropyHash = ethers.utils.keccak256(keyBytes);     // bytes32
+	const entropyBN = ethers.BigNumber.from(entropyHash);  // uint256 for ABI
+
+	// ESTIMATE VALUE (your existing logic)
+	const gasCost      = await contract.estimateGasCost();             // 300k * gasPrice
+	const price        = gasCost.div(300_000);                         // ≈ current gasPrice
+	const fixedGas     = ethers.BigNumber.from(450_000);
+	const fixedGasCost = price.mul(fixedGas);                          // 450k * gasPrice
+	
+	const feeBp        = await contract.feeBasisPoints();              // e.g. 30
+	const denom        = ethers.BigNumber.from(10_000).sub(feeBp);     // 10000 – feeBp
+	
+	// compute the bare minimum to cover gas+fee
+	const minValue = fixedGasCost
+	              .mul(10_000)
+	              .add(denom.sub(1))   // round up
+	              .div(denom);
+	
+	// THEN enforce the contract’s 0.001 ETH floor:
+	const MIN_COVER = ethers.BigNumber.from("1000000000000000");  // 0.001 ETH
+	const value     = minValue.gte(MIN_COVER) ? minValue : MIN_COVER;
+
+    // SIGN COMMITMENT (digest not exposed)
+    const burnId = await contract.burnIds(user);
+	const messageHash = ethers.utils.solidityKeccak256(
+	  ['address','uint256','address','address','uint256','uint256','uint256'],
+	  [stealthAddress, burnId, user, CONTRACT, chainId, value, entropyBN]
+	);
+	const signature = await signer.signMessage(ethers.utils.arrayify(messageHash));
+
+	// GAS SAFETY BUFFER
+	let estGas;
+	try {
+	  estGas = await contract.estimateGas.requestBurn(stealthAddress, signature, entropyBN, { value });
+	} catch {
+	  estGas = ethers.BigNumber.from(400000); // fallback
+	}
+	const finalGasLimit = estGas.add(100000);
+
+	// DEBUG: log exactly what we're about to send
+	console.log('requestBurn →', {
+ 	stealthAddress,
+  	signature,
+  	entropy: entropyBN.toString(),
+	netValue: value.sub(await contract.calculateFee(value)).toString()
+	});
+
+    // SEND TX
+    logToConsole(burnConsole, 'Sending burn transaction...', '');
+    const tx = await contract.requestBurn(stealthAddress, signature, entropyBN, {
+      value,
+      gasLimit: finalGasLimit
+    });
+    burningLog.textContent = `Burn tx: ${tx.hash.substring(0, 10)}…`;
+
+    logToConsole(burnConsole, 'Waiting for confirmation...', 'typing');
+    await tx.wait();
+    logToConsole(burnConsole, 'Stealth transfer complete!', 'success');
+
+    // SHOW KEY ONLY AFTER SUCCESS
+	const privateKeyHex = stealthWallet.privateKey;  // "0xabc123…"
+	pkeyText.value        = privateKeyHex;
+	stealthAddressText.value = stealthAddress;
+	stealthModal.style.display = 'flex';
+    startSecurityTimer();
+
+    await updateBalance();
+  } catch (err) {
+    burningLog.textContent = `Burn failed: ${err.message || err}`;
+    burningLog.className = 'log error';
+  }
+}
+
+/* ---------- wire buttons ---------- */
+document.getElementById('connect').addEventListener('click', connectWallet);
+document.getElementById('mint').addEventListener('click', mintToken);
+document.getElementById('burn').addEventListener('click', burnAnon);
+
+document.getElementById('copyPKey').addEventListener('click', function() {
+  pkeyText.select();
+  navigator.clipboard.writeText(pkeyText.value);
+  this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+  setTimeout(() => this.innerHTML = '<i class="fas fa-copy"></i> Copy Key', 2000);
+});
+
+document.getElementById('downloadPKey').addEventListener('click', function() {
+  saveKey(pkeyText.value);
+  this.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+  setTimeout(() => this.innerHTML = '<i class="fas fa-download"></i> Download Key File', 2000);
+});
+
+document.getElementById('closeModal').addEventListener('click', function() {
+  stealthModal.style.display = 'none';
+});
+
+// Initialize the UI
+window.addEventListener('DOMContentLoaded', () => {
+  logToConsole(mintConsole, 'ANON protocol initialized. Connect your wallet to begin.', '');
+  logToConsole(burnConsole, 'Stealth system ready. Awaiting connection...', '');
+});
+</script>
+</body>
+</html>
