@@ -4,7 +4,7 @@
 
 ANONToken is a censorship-resistant ERC-20 dApp deployed on the Linea Sepolia Testnet. It allows users to unlink their everyday wallet (like MetaMask) from real-world spending (e.g., MetaMask Card) by minting and burning a token. ETH is sent to a newly generated, anonymous wallet — no bridges, no relayers, no zk required.
 
-> 🔗 **App:** [immense-honey-brief.on-fleek.app](https://immense-honey-brief.on-fleek.app)  
+> 🔗 **App:** [anonfrontend.pages.dev](https://anonfrontend.pages.dev/)  
 > 🧱 **Contract:** `0xAfEAE83BD71E44d4291E95D621B10f3d3ff29a28` (Linea Sepolia)
 
 ---
@@ -95,4 +95,4 @@ This system is experimental, use at your own risk.
 
 ## 🧬 License
 
-MIT © 2025 — CountFuckula.com
+MIT © 2025
